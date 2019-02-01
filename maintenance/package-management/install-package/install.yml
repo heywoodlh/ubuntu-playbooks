@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: install single package
+    apt:
+      name: "{{ package_name }}"
+      update_cache: yes

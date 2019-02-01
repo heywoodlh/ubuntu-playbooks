@@ -1,0 +1,13 @@
+---
+- name: copy ssh fail2ban config
+  copy:
+    src: sshd.local
+    dest: /etc/fail2ban/jail.d/sshd.local
+    owner: root
+    group: root
+    mode: 0600
+    force: no
+- name: restart fail2ban
+  systemd:
+    name: fail2ban
+    state: restarted 

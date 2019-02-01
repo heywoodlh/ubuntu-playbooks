@@ -1,0 +1,10 @@
+---
+- name: update rkhunter database
+  command: rkhunter --propupd
+- name: set up rkhunter cronjob
+  cron:
+    name: rkhunter daily cron
+    user: root
+    minute: 0
+    hour: 0
+    job: rkhunter --checkall

@@ -1,0 +1,7 @@
+---
+- name: append ansible user to /etc/sudoers.d/ansible
+  lineinfile:
+    path: /etc/sudoers.d/ansible
+    create: yes
+    insertafter: EOF
+    line: 'ansible ALL=NOPASSWD: ALL'

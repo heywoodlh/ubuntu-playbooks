@@ -1,0 +1,14 @@
+---
+- name: create /var/log/debsecan directory
+  file:
+    path: /var/log/debsecan
+    state: directory
+    mode: 0700
+- name: debsecan cronjob
+  cron:
+    name: daily debsecan cronjob
+    state: present
+    minute: 0
+    hour: 3
+    user: root
+    job: "debsecan --suite sid --format summary > /var/log/debsecan/vulns.txt"

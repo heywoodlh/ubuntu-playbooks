@@ -1,0 +1,6 @@
+---
+- name: enable and start fail2ban service
+  systemd:
+    name: fail2ban
+    state: started
+    enabled: yes

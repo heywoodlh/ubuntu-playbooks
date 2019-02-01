@@ -1,0 +1,25 @@
+---
+- name: copy desired /etc/motd file
+  copy:
+    src: motd
+    dest: /etc/motd
+    mode: 0644
+    force: no
+- name: comment out original 'X11Forwarding yes' in /etc/ssh/sshd_config
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^X11Forwarding yes'
+    replace: '#X11Forwarding yes'
+- name: enable banners; disable X11 forwarding, empty passwords and root login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: "{{ item.line }}"
+    insertafter: EOF
+  with_items:
+    - { line: 'X11Forwarding no' }
+    - { line: 'PermitEmptyPasswords no' }
+    - { line: 'PermitRootLogin no' }
+- name: restart SSH service
+  systemd:
+    name: ssh
+    state: restarted

@@ -1,0 +1,17 @@
+---
+- name: check if umask is set in /etc/profile
+  shell: cat /etc/profile
+  register: profile_contents
+- name: set global umask to 027
+  when: profile_contents.stdout.find('umask') != -1
+  replace:
+    path: /etc/profile
+    regexp: 'umask 022'
+    replace: 'umask 027'
+    backup: yes
+- name: set global umask to 027
+  when: profile_contents.stdout.find('umask') == -1
+  lineinfile:
+    path: /etc/profile
+    line: 'umask 027'
+    insertafter: EOF

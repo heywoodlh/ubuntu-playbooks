@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: remove single package
+    apt:
+      name: "{{ package_name }}"
+      state: absent
+      update_cache: yes

@@ -1,0 +1,23 @@
+---
+- name: install various hardening packages
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: true
+  vars:
+    packages:
+    - clamav
+    - libpam-tmpdir
+    - apt-listchanges
+    - apt-show-versions
+    - debian-goodies
+    - debsecan
+    - debsums
+    - libpam-cracklib
+    - sysstat
+    - rkhunter
+    - fail2ban
+    - auditd
+- name: remove orphaned packages
+  apt:
+    autoremove: yes

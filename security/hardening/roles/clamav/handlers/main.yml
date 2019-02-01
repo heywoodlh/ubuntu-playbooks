@@ -1,0 +1,6 @@
+---
+- name: enable and start freshclam service
+  systemd:
+    name: clamav-freshclam
+    state: started
+    enabled: yes
