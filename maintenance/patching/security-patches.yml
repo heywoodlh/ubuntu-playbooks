@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Make a copy of security repos
+    shell: cat /etc/apt/sources.list | grep security > /etc/apt/security.sources.list
+  - name: Update cache
+    apt: 
+      update_cache: yes
+  - name: Install security updates
+    shell: apt-get upgrade -oDir::Etc::SourceList=/etc/apt/security.sources.list

@@ -1,0 +1,10 @@
+---
+- hosts: all 
+  tasks:
+  - name: create "{{ user }}" and add to the sudo group
+    user:
+      name: "{{ user }}"
+      state: present
+      groups: sudo
+      append: yes
+    become: true

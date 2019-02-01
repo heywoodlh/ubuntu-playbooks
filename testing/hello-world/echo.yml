@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+  - name: print hello world
+    command: echo 'hello world'

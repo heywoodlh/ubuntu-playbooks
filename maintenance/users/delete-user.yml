@@ -1,0 +1,9 @@
+---
+- hosts: all 
+  become: true
+  tasks:
+  - name: delete "{{ user }}" and their home directory
+    user:
+      name: "{{ user }}"
+      state: absent
+      remove: yes

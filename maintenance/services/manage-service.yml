@@ -1,0 +1,8 @@
+---
+- hosts: all 
+  tasks:
+  - name: "{{ service }} {{ state }}"
+    systemd:
+      name: "{{ service }}"
+      state: "{{ state }}"
+    become: true

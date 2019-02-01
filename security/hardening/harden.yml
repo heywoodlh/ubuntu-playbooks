@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  roles:
+# - umask
+  - apt
+  - ssh
+  - fail2ban
+  - clamav
+  - pam_cracklib
+  - debsecan
+  - rkhunter

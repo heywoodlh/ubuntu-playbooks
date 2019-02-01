@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+  - name: apt-get dist-upgrade
+    apt:
+      upgrade: dist
+      update_cache: yes
+    become: true
