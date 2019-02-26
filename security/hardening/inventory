@@ -14,7 +14,7 @@ localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env pyth
 
 ssh_set_timeout: 'True'
 ssh_set_banner: 'True'
-ssh_set_contant: 'True'
+ssh_set_contact: 'True'
 ssh_banner_contact_info: 'Spencer Heywood (111)-222-3333'
 
 clamav_install: 'True'

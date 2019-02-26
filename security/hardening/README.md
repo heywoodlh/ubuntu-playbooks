@@ -26,7 +26,7 @@ sudo apt-get install python -y
 2. Download this repository and `cd` into the hardening directory:
 
 ```
-git clone https://github.com/heywoodlh/ubuntu-playbooks
+git clone https://github.com/heywoodlh/ubuntu_playbooks
 cd ubuntu-playbooks/security/hardening
 ```
 
