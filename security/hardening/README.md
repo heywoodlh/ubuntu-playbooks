@@ -27,7 +27,7 @@ sudo apt-get install python -y
 
 ```
 git clone https://github.com/heywoodlh/ubuntu_playbooks
-cd ubuntu-playbooks/security/hardening
+cd ubuntu_playbooks/security/hardening
 ```
 
 
