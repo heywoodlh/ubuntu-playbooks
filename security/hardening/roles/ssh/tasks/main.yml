@@ -11,7 +11,7 @@
     path: /etc/motd
     insertafter: EOF
     line: "{{ ssh_banner_contact_info }}"
-  when: ssh_set_banner == 'True'
+  when: ssh_set_contact == 'True'
 - name: comment out original 'X11Forwarding yes' in /etc/ssh/sshd_config
   replace:
     path: /etc/ssh/sshd_config
@@ -27,6 +27,9 @@
     - { line: 'PermitEmptyPasswords no' }
     - { line: 'PermitRootLogin no' }
     - { line: 'PermitUserEnvironment no' }
+    - { line: 'KerberosAuthentication no' }
+    - { line: 'UsePrivilegeSeparation sandbox' }
+    - { line: 'Compression delayed' }
 - name: add SSH client timeout if set to true
   lineinfile:
     dest: /etc/ssh/sshd_config

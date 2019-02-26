@@ -1,0 +1,37 @@
+# comment out the line below if you do not want to run this hardening playbook against the local machine
+localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python"
+
+
+# uncomment the following lower lines and replace 'remote.host.[1-2]' with the hostnames of your machines
+#[all]
+#remote.host.1
+#remote.host.2
+
+
+
+# set the variables below with desired values
+[all:vars]
+
+ssh_set_timeout: 'True'
+ssh_set_banner: 'True'
+ssh_set_contant: 'True'
+ssh_banner_contact_info: 'Spencer Heywood (111)-222-3333'
+
+clamav_install: 'True'
+
+rsyslog: 'False'
+rsyslog_server: 'myremote.host:514'
+
+packages:
+  - libpam-tmpdir
+  - apt-listchanges
+  - apt-show-versions
+  - debian-goodies
+  - debsecan
+  - debsums
+  - libpam-cracklib
+  - sysstat
+  - rkhunter
+  - fail2ban
+  - auditd
+  - rsyslog

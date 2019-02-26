@@ -8,8 +8,24 @@
     - { line: '-w /etc/group -p wa' }
     - { line: '-w /etc/passwd -p wa' }
     - { line: '-w /etc/shadow -p wa' }
-    - { line: '-w /etc/sudoers -p wa' }
+    - { line: '-w /etc/sudoers -p wa -k privileged-actions' }
+    - { line: '-w /etc/sudoers.d/ -p wa -k privileged-actions' }
     - { line: '-w /etc/ssh/sshd_config -p wa' }
+    - { line: '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid' }
+    - { line: '-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid' }
+    - { line: '-a always,exit -F arch=b64 -S chown -F auid>=1000 -F auid!=4294967295 -k perm_mod' }
+    - { line: '-a always,exit -F arch=b64 -S chmod -F auid>=1000 -F auid!=4294967295 -k perm_mod' }
+    - { line: '-a always,exit -F arch=b64 -S open -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access' }
+    - { line: '-a always,exit -F arch=b64 -S open -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access' }
+    - { line: '-w /var/run/faillock -p wa -k logins' }
+    - { line: '-w /var/log/lastlog -p wa -k logins' }
+    - { line: '-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd' }
+    - { line: '-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd' }
+    - { line: '-a always,exit -F path=/usr/bin/su -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change' }
+    - { line: '-a always,exit -F path=/usr/bin/sudo -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change' }
+    - { line: '-a always,exit -F path=/usr/bin/chsh -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change' }
+    - { line: '-a always,exit -F path=/usr/bin/crontab -F auid>=1000 -F auid!=4294967295 -k privileged-cron' }
+    - { line: '-w /usr/bin/kmod -p x -F auid!=4294967295 -k module-change' }
 - name: restart auditd.service 
   systemd:
     name: auditd

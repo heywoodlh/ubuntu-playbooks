@@ -4,8 +4,19 @@
     path: /etc/default/useradd
     insertafter: EOF
     line: 'INACTIVE=0'
-- name: append 'FAIL_DELAY 4' to /etc/login.defs (number of seconds after failed login that the console will reappear)
+- name: set 4 second login delay after failed login attempt
+  replace:
+    path: /etc/pam.d/login
+    regexp: "^auth       optional   pam_faildelay.so  delay=3000000"
+    replace: 'auth       optional   pam_faildelay.so  delay=4000000'
+- name: set 'DIR_MODE=0750' in /etc/adduser.conf
+  replace:
+    path: /etc/adduser.conf
+    regexp: "^DIR_MODE=0755"
+    replace: 'DIR_MODE=0750'
+  when: ansible_facts['os_family'] == "Debian"
+- name: set limit of 10 concurrent sessions per user account
   lineinfile:
-    path: /etc/login.defs
+    path: /etc/security/limits.conf
     insertafter: EOF
-    line: 'FAIL_DELAY 4'
+    line: '* hard maxlogins 10'

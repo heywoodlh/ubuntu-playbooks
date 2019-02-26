@@ -10,8 +10,6 @@
   - pam_cracklib
   - debsecan
   - rkhunter
-  - launcher
-  - filebeat
-  - rsyslog
   - stig
   - auditd
+  - rsyslog
