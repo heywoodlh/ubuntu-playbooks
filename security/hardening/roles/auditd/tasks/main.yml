@@ -1,0 +1,17 @@
+---
+- name: append rules to /etc/audit/rules.d/audit.rules
+  lineinfile:
+    path: /etc/audit/rules.d/audit.rules
+    line: "{{ item.line }}"
+    insertafter: EOF
+  with_items:
+    - { line: '-w /etc/group -p wa' }
+    - { line: '-w /etc/passwd -p wa' }
+    - { line: '-w /etc/shadow -p wa' }
+    - { line: '-w /etc/sudoers -p wa' }
+    - { line: '-w /etc/ssh/sshd_config -p wa' }
+- name: restart auditd.service 
+  systemd:
+    name: auditd
+    state: restarted 
+    enabled: yes

@@ -1,0 +1,11 @@
+---
+- name: append INACTIVE=0 to /etc/default/useradd (number of days after expiration that an account is deactivated)
+  lineinfile:
+    path: /etc/default/useradd
+    insertafter: EOF
+    line: 'INACTIVE=0'
+- name: append 'FAIL_DELAY 4' to /etc/login.defs (number of seconds after failed login that the console will reappear)
+  lineinfile:
+    path: /etc/login.defs
+    insertafter: EOF
+    line: 'FAIL_DELAY 4'

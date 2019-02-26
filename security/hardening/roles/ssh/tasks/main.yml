@@ -4,13 +4,20 @@
     src: motd
     dest: /etc/motd
     mode: 0644
-    force: no
+    force: yes
+  when: ssh_set_banner == 'True'
+- name: append contact information to /etc/motd
+  lineinfile:
+    path: /etc/motd
+    insertafter: EOF
+    line: "{{ ssh_banner_contact_info }}"
+  when: ssh_set_banner == 'True'
 - name: comment out original 'X11Forwarding yes' in /etc/ssh/sshd_config
   replace:
     path: /etc/ssh/sshd_config
     regexp: '^X11Forwarding yes'
     replace: '#X11Forwarding yes'
-- name: enable banners; disable X11 forwarding, empty passwords and root login
+- name: disable X11 forwarding, empty passwords and root login; set SSH inactive timeout
   lineinfile:
     dest: /etc/ssh/sshd_config
     line: "{{ item.line }}"
@@ -19,6 +26,16 @@
     - { line: 'X11Forwarding no' }
     - { line: 'PermitEmptyPasswords no' }
     - { line: 'PermitRootLogin no' }
+    - { line: 'PermitUserEnvironment no' }
+- name: add SSH client timeout if set to true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: "{{ item.line }}"
+    insertafter: EOF
+  with_items:
+    - { line: 'ClientAliveInterval 600' }
+    - { line: 'ClientAliveCountMax 3' }
+  when: ssh_set_timeout == 'True'
 - name: restart SSH service
   systemd:
     name: ssh
