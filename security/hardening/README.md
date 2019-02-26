@@ -38,7 +38,14 @@ nano inventory
 ```
 
 
-4. Once inventory is configured, run the playbook using the inventory file:
+4. It is recommended to edit the banner that will be displayed on the machine:
+
+```
+nano roles/ssh/files/motd
+```
+
+
+5. Once inventory and your banner are configured, run the playbook using the inventory file:
 
 ```
 ansible-playbook -i inventory harden.yml
