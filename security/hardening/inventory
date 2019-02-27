@@ -12,15 +12,15 @@ localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env pyth
 # set the variables below with desired values
 [all:vars]
 
-ssh_set_timeout: 'True'
-ssh_set_banner: 'True'
-ssh_set_contact: 'True'
-ssh_banner_contact_info: 'Spencer Heywood (111)-222-3333'
+ssh_set_timeout='True'
+ssh_set_banner='True'
+ssh_set_contact='True'
+ssh_banner_contact_info='Spencer Heywood (111)-222-3333'
 
-clamav_install: 'True'
+clamav_install='True'
 
-rsyslog: 'False'
-rsyslog_server: 'myremote.host:514'
+rsyslog='False'
+rsyslog_server='myremote.host:514'
 
 packages:
   - libpam-tmpdir
