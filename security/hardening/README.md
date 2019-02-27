@@ -1,5 +1,8 @@
 ## Hardening playbooks
 
+##### It is recommended to run this playbook on test servers first in order to ensure it does not interrupt service on production servers. By using this repository you agree to not hold the owner of the repository liable for any damage that occurs by using these playbooks.
+
+
 *This playbook has only been designed for Ubuntu 16.04+. You will have to modify the calls for the Ansible systemd modules to init.d for any Ubuntu release older than 16.04.* 
 
 
